@@ -228,6 +228,7 @@ class ExperimentConfigBuilder(ConfigBuilder):
             map(lambda a: rv.AnalyzerConfig.from_proto(a), msg.analyzers))
         evaluators = list(
             map(lambda e: rv.EvaluatorConfig.from_proto(e), msg.evaluators))
+
         return b.with_id(msg.id) \
                 .with_task(rv.TaskConfig.from_proto(msg.task)) \
                 .with_backend(rv.BackendConfig.from_proto(msg.backend)) \
@@ -260,6 +261,13 @@ class ExperimentConfigBuilder(ConfigBuilder):
         e.config['predict_uri'] = self.config.get('predict_uri')
         e.config['eval_uri'] = self.config.get('eval_uri')
         e.config['bundle_uri'] = self.config.get('bundle_uri')
+        e.analyze_key = self.analyze_key
+        e.chip_key = self.chip_key
+        e.train_key = self.train_key
+        e.predict_key = self.predict_key
+        e.eval_key = self.eval_key
+        e.bundle_key = self.bundle_key
+
         return e
 
     def with_id(self, id):
